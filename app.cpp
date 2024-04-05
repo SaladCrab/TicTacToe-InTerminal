@@ -1,6 +1,8 @@
 //Tic Tac Toe
+//Left off on trying to clear the terminal and then show to table and request using "system("CLS");"
 
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 void P1PositionSelect(char board[][3], int selectedPos){
@@ -239,14 +241,7 @@ bool P2WinCheck(char board[][3]){
 
 }
 
-int main(){
-
-    char board[3][3] = {'1', '2', '3', 
-                        '4', '5', '6', 
-                        '7', '8', '9'};
-
-    int j = 0;
-
+void PrintBoard(char board[][3]){
     for (int i = 0; i < 3; i++){
         if (i > 0){
             cout << endl << "---------------";
@@ -256,6 +251,15 @@ int main(){
             cout << board[i][j] << " | ";
         }
     }
+}
+
+int main(){
+
+    char board[3][3] = {'1', '2', '3', 
+                        '4', '5', '6', 
+                        '7', '8', '9'};
+
+    int j = 0;
 
     int counter = 0;
     int selectedPos;
@@ -264,45 +268,35 @@ int main(){
     bool p2Win;
 
     while (running == true){
-
+        system("CLS");
+        PrintBoard(board);
         if (counter % 2 == 0){
             cout << endl << endl << "Player 1's turn please enter the position you'd like to place your 'X' in: ";
             cin >> selectedPos;
             P1PositionSelect(board, selectedPos);
-            for (int i = 0; i < 3; i++){
-                if (i > 0){
-                    cout << endl << "---------------";
-                }
-                cout << endl << " | ";
-                for (int j = 0; j < 3; j++){
-                    cout << board[i][j] << " | ";
-                }
-            }    
         } else if (counter % 2 == 1){
             cout << endl << endl << "Player 2's turn please enter the position you'd like to placer your 'O' in: ";
             cin >> selectedPos;
             P2PositionSelect(board, selectedPos);
-            for (int i = 0; i < 3; i++){
-                if (i > 0){
-                    cout << endl << "---------------";
-                }
-                cout << endl << " | ";
-                for (int j = 0; j < 3; j++){
-                    cout << board[i][j] << " | ";
-                }
-            }
         }
         counter++;
 
         if (P1WinCheck(board)){
+            system("CLS");
+            PrintBoard(board);
             cout << endl << endl << "Player 1 wins!";
             running = false;
-        } else if (P2WinCheck(board)){
+        }
+        if (P2WinCheck(board)){
+            system("CLS");
+            PrintBoard(board);
             cout << endl << endl << "Player 2 wins!";
             running = false;
         }
 
         if (counter >= 9){
+            system("CLS");
+            PrintBoard(board);
             cout << endl << endl << "Looks like it ended in a tie!";
             running = false;
         }
